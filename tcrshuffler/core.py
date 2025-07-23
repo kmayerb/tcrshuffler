@@ -60,7 +60,7 @@ def shuffle(tcrs,
             depth=2,
             random_seed=1,
             return_presuffled=False,
-            return_errors=True):
+            return_errors=False):
     """
     Shuffle TCR sequences by splitting and recombining CDR3 regions.
 

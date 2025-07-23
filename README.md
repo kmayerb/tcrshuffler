@@ -11,13 +11,11 @@ TCR Shuffler analyzes TCR sequences to identify germline V, D, and J gene contri
 - **Germline Analysis**: Identifies V, D, and J gene contributions to CDR3 sequences
 - **Structure-Aware Shuffling**: Preserves biological constraints while randomizing sequences  
 - **Support for Both Chains**: Works with both alpha (A) and beta (B) TCR chains
-- **Flexible Configuration**: Customizable parameters for different analysis needs
-- **Error Handling**: Robust processing with detailed error reporting
 
 ## Installation
 
 ```bash
-pip install tcrshuffler
+pip install git+https://github.com/kmayerb/tcrshuffler.git
 ```
 
 Or install from source:
@@ -62,19 +60,20 @@ print(shuffled.head())
 ### Basic Beta Chain Shuffling
 
 ```python
-from tcrshuffler import shuffle
+from tcrshuffler.core import shuffle
 import pandas as pd
 
 # Your TCR data
-tcr_data = pd.read_csv('your_tcr_data.csv')
+tcr_data = pd.read_csv('https://raw.githubusercontent.com/kmayerb/tcrdist3/refs/heads/master/dash_human.csv', sep = ",")
 
 # Shuffle with default parameters
 shuffled_tcrs = shuffle(
     tcrs=tcr_data,
     chain="B", 
-    v_col='v_beta_gene',
-    cdr3_col='cdr3_beta',
-    j_col='j_beta_gene'
+    v_col='v_b_gene',
+    cdr3_col='cdr3_b_aa',
+    j_col='j_b_gene',
+    depth = 1
 )
 ```
 
@@ -85,9 +84,9 @@ shuffled_tcrs = shuffle(
 alpha_shuffled = shuffle(
     tcrs=tcr_data,
     chain="A",
-    v_col='v_alpha_gene', 
-    cdr3_col='cdr3_alpha',
-    j_col='j_alpha_gene'
+    v_col='v_a_gene', 
+    cdr3_col='cdr3_a_aa',
+    j_col='j_a_gene'
 )
 ```
 

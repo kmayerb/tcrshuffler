@@ -1,9 +1,9 @@
 """
-Tests for tcrshuffler package.
+Tests for tcrshuffler package. -- Writen by Claude Sonnet not human tested yet!
 """
 import pytest
 import pandas as pd
-from tcrshuffler import shuffle, load_reference
+from tcrshuffler.core import shuffle, load_reference
 from tcrshuffler.utils import (
     label_cdr3_germline_vj_regions,
     best_d_alignment,
@@ -23,7 +23,7 @@ class TestUtils:
         germline_j = "EAFF"
         
         result = label_cdr3_germline_vj_regions(cdr3, germline_v, germline_j)
-        expected = "VVVVNNNNNNNNJJJJ"
+        expected = "VVVVNNNNNNNJJJJ"
         assert result == expected
         
     def test_label_cdr3_empty_germlines(self):

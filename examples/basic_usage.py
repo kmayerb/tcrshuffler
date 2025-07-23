@@ -6,7 +6,7 @@ This script demonstrates common use cases for the TCR shuffling functionality.
 """
 
 import pandas as pd
-from tcrshuffler import shuffle
+from tcrshuffler.core import shuffle
 
 
 def example_basic_beta_shuffling():

@@ -30,7 +30,7 @@ pip install -e .
 
 ```python
 import pandas as pd
-from tcrshuffler import shuffle
+from tcrshuffle.core import shuffle
 
 # Load your TCR data
 tcrs = pd.DataFrame({

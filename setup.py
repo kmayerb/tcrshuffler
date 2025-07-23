@@ -12,7 +12,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="tcrshuffler",
     version="0.1.0",
-    author="KMB
+    author="KMB",
     author_email="",
     description="A simple TCR sequence shuffling package",
     long_description=long_description,

@@ -1,10 +1,15 @@
 # TCR Shuffler
 
-A Python package for shuffling T-cell receptor (TCR) sequences by splitting and recombining CDR3 regions while preserving germline structure.
+A <span style="color:red"><b>currently in-development</b></span> Python package for shuffling T-cell receptor (TCR) sequences by splitting and recombining CDR3 regions while preserving germline structure.
 
 ## Overview
 
-TCR Shuffler analyzes TCR sequences to identify germline V, D, and J gene contributions to CDR3 regions, then shuffles the non-templated regions to create randomized but structurally valid TCR sequences. This is useful for generating null distributions in TCR repertoire analysis.
+This version is lightweight and has no major dependencies but it has not yet been fully tested.
+
+TCR Shuffler analyzes TCR sequences to identify germline V, D, and J gene contributions to CDR3 regions, then shuffles the non-templated regions to create randomized but structurally valid TCR sequences. This is useful for generating null distributions in TCR repertoire analysis. 
+
+This utility is in development, but it only needs IMGT V and J gene names and CDR3 (amino acid sequences) as to more advanced methods that use the CDR3 junctional nucleotide sequence. For more advanced shuffling capacity consider visiting the [conga project](https://github.com/phbradley/conga) or [immune_response_detection](https://github.com/svalkiers/immune_response_detection) Repositories. 
+
 
 ## Features
 
@@ -18,19 +23,18 @@ TCR Shuffler analyzes TCR sequences to identify germline V, D, and J gene contri
 pip install git+https://github.com/kmayerb/tcrshuffler.git
 ```
 
-Or install from source:
+or clone:
 
 ```bash
 git clone https://github.com/yourusername/tcrshuffler.git
 cd tcrshuffler
-pip install -e .
 ```
 
 ## Quick Start
 
 ```python
 import pandas as pd
-from tcrshuffle.core import shuffle
+from tcrshuffler.core import shuffle
 
 # Load your TCR data
 tcrs = pd.DataFrame({
@@ -86,8 +90,7 @@ alpha_shuffled = shuffle(
     chain="A",
     v_col='v_a_gene', 
     cdr3_col='cdr3_a_aa',
-    j_col='j_a_gene'
-)
+    j_col='j_a_gene')
 ```
 
 ### Pre-shuffle Analysis
@@ -97,9 +100,11 @@ alpha_shuffled = shuffle(
 preshuffle_analysis = shuffle(
     tcrs=tcr_data,
     chain="B",
+    v_col='v_a_gene', 
+    cdr3_col='cdr3_a_aa',
+    j_col='j_a_gene',
     return_presuffled=True,
-    return_errors=False
-)
+    return_errors=False)
 
 # Examine how sequences are parsed
 print(preshuffle_analysis[['cdr3', 'cdr3_source', 'cut_cdr3']].head())
@@ -111,9 +116,11 @@ print(preshuffle_analysis[['cdr3', 'cdr3_source', 'cut_cdr3']].head())
 # Check which sequences failed processing
 errors = shuffle(
     tcrs=tcr_data,
-    chain="B", 
-    return_errors=True
-)
+    chain="A",
+    v_col='v_a_gene', 
+    cdr3_col='cdr3_a_aa',
+    j_col='j_a_gene' ,
+    return_errors=True)
 
 print(f"Failed to process {len(errors)} sequences")
 ```
